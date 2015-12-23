@@ -3,6 +3,8 @@
 
     <color name="red">#FF3C41</color>
     <color name="purple">#9200FF</color>
+    <color name="transparent_red">#85FF3C41</color>
+    <color name="transparent_purple">#859200FF</color>
     <color name="grey">#EFEFEF</color>
 
 
