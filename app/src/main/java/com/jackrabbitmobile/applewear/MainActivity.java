@@ -175,16 +175,16 @@ public class MainActivity extends WearableActivity {
 
         switch (chosenOne) {
             case DOUBLE_ROTATE:
-                redViewAnimationWithDualRotate(redView);
+                redViewAnimationWithOvershoot(redView);
                 break;
             case OVERSHOOT:
                 redViewAnimationWithOvershoot(redView);
                 break;
             case SINGLE_ROTATE:
-                redViewAnimationWithSingleRotate(redView);
+                redViewAnimationWithOvershoot(redView);
                 break;
             case BOUNCE:
-                redViewAnimationWithBounce(redView);
+                redViewAnimationWithOvershoot(redView);
                 break;
         }
 

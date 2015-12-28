@@ -28,7 +28,6 @@
         android:layout_below="@+id/what_color_tv"
         android:textColor="@android:color/black"
         android:textStyle="bold"
-        android:layout_marginTop="4dp"
         android:textSize="24sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -44,20 +43,15 @@
         android:elevation="16dp"
         android:layout_marginBottom="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true" />
 
-    <View
+    <ImageView
         android:layout_below="@+id/is_an_apple_tv"
         android:id="@+id/gray_view"
         android:layout_centerHorizontal="true"
-        android:elevation="16dp"
-        android:background="@drawable/gray_drag"
+        android:background="@drawable/apple_icon"
         android:layout_marginTop="38dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
         android:layout_width="32dp"
         android:layout_height="32dp"/>
 
@@ -69,7 +63,6 @@
         android:layout_height="60dp"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
-        android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         android:layout_alignParentRight="true"
         android:background="@drawable/purple_circle_view" />
@@ -86,7 +79,7 @@
         android:visibility="invisible"
         android:id="@+id/correct_tv"
         android:text="Correct!"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginBottom="8dp"
@@ -100,7 +93,7 @@
         android:id="@+id/red_tv"
         android:text="Red!"
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="24sp"
         android:layout_below="@+id/center_view"
         android:layout_centerHorizontal="true"

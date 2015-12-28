@@ -2,7 +2,7 @@
 <resources>
 
     <color name="red">#FF3C41</color>
-    <color name="darker_red">#F41923</color>
+    <color name="darker_red">#CC0007</color>
     <color name="purple">#9200FF</color>
     <color name="darker_purple">#6C00CA</color>
     <color name="transparent_red">#85FF3C41</color>
