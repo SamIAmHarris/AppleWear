@@ -2,10 +2,19 @@
 <resources>
 
     <color name="red">#FF3C41</color>
+    <color name="darker_red">#F41923</color>
     <color name="purple">#9200FF</color>
+    <color name="darker_purple">#6C00CA</color>
     <color name="transparent_red">#85FF3C41</color>
     <color name="transparent_purple">#859200FF</color>
-    <color name="grey">#CFCFCF</color>
+    <color name="grey">#dFdFdF</color>
+
+
+    <color name="super_dark_grey">#5A5C5D</color>
+    <color name="dark_grey">#8E8F93</color>
+    <color name="regular_grey">#C7C7CC</color>
+    <color name="light_grey">#E7E7E9</color>
+    <color name="super_light_grey">#F9F9F9</color>
 
 
 </resources>

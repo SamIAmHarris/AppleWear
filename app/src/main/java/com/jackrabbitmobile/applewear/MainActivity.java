@@ -10,11 +10,14 @@ import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 
 public class MainActivity extends WearableActivity {
 
@@ -62,6 +65,7 @@ public class MainActivity extends WearableActivity {
                     case DragEvent.ACTION_DRAG_STARTED:
                         break;
                     case DragEvent.ACTION_DRAG_ENTERED:
+                        shakeAnimation(purpleView);
                         purpleView.setBackground(getResources().getDrawable(R.drawable.transparent_purple_circle));
                         break;
                     case DragEvent.ACTION_DRAG_EXITED:
@@ -85,6 +89,7 @@ public class MainActivity extends WearableActivity {
                         Log.i("Drag", "Drag started");
                         break;
                     case DragEvent.ACTION_DRAG_ENTERED:
+                        shakeAnimation(redView);
                         redView.setBackground(getResources().getDrawable(R.drawable.transparent_red_circle));
                         Log.i("Drag", "Drag entered");
                         break;
@@ -145,14 +150,20 @@ public class MainActivity extends WearableActivity {
         fadeOutViewAnimation(whatColorTV);
         fadeOutViewAnimation(isAnAppleTV);
 
-        //redViewAnimationWithDualRotate(redView);
+        redViewAnimationWithDualRotate(redView);
         //redViewAnimationWithBounce(redView);
         //redViewAnimationWithOvershoot(redView);
-        redViewAnimationWithSingleRotate(redView);
+        //redViewAnimationWithSingleRotate(redView);
 
         fadeInViewAnimation(correctTV);
         fadeInViewAnimation(redTV);
         fadeInViewAnimation(checkmarkView);
+    }
+
+    public void shakeAnimation(View v) {
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.shake);
+
+        v.startAnimation(anim);
     }
 
     public void fadeInViewAnimation(View v) {
