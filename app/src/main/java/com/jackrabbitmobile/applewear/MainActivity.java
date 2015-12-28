@@ -9,6 +9,9 @@ import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AnticipateOvershootInterpolator;
+import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -142,7 +145,10 @@ public class MainActivity extends WearableActivity {
         fadeOutViewAnimation(whatColorTV);
         fadeOutViewAnimation(isAnAppleTV);
 
-        redViewAnimation(redView);
+        //redViewAnimationWithDualRotate(redView);
+        //redViewAnimationWithBounce(redView);
+        //redViewAnimationWithOvershoot(redView);
+        redViewAnimationWithSingleRotate(redView);
 
         fadeInViewAnimation(correctTV);
         fadeInViewAnimation(redTV);
@@ -164,7 +170,7 @@ public class MainActivity extends WearableActivity {
         fadeIn.start();
     }
 
-    public void redViewAnimation(View v) {
+    public void redViewAnimationWithDualRotate(View v) {
         v.setBackground(getResources().getDrawable(R.drawable.red_circle_view));
         float parentCenterX = centerView.getX();
         float parentCenterY = centerView.getY();
@@ -184,7 +190,70 @@ public class MainActivity extends WearableActivity {
         rotateY.setDuration(500);
 
         AnimatorSet set = new AnimatorSet();
+        set.setInterpolator(new AccelerateDecelerateInterpolator());
         set.playTogether(translateX, translateY, rotateX, rotateY);
+        set.start();
+    }
+
+
+    public void redViewAnimationWithSingleRotate(View v) {
+        v.setBackground(getResources().getDrawable(R.drawable.red_circle_view));
+        float parentCenterX = centerView.getX();
+        float parentCenterY = centerView.getY();
+
+        ObjectAnimator translateX = ObjectAnimator.ofFloat(v, View.TRANSLATION_X,
+                parentCenterX - 32);
+        ObjectAnimator translateY = ObjectAnimator.ofFloat(v, View.TRANSLATION_Y,
+                -(parentCenterY-85));
+        ObjectAnimator rotateX = ObjectAnimator.ofFloat(v, View.ROTATION_Y,
+                360);
+
+
+        translateX.setDuration(500);
+        translateY.setDuration(500);
+        rotateX.setDuration(500);
+
+        AnimatorSet set = new AnimatorSet();
+        set.setInterpolator(new AccelerateDecelerateInterpolator());
+        set.playTogether(translateX, translateY, rotateX);
+        set.start();
+    }
+
+    public void redViewAnimationWithOvershoot(View v) {
+        v.setBackground(getResources().getDrawable(R.drawable.red_circle_view));
+        float parentCenterX = centerView.getX();
+        float parentCenterY = centerView.getY();
+
+        ObjectAnimator translateX = ObjectAnimator.ofFloat(v, View.TRANSLATION_X,
+                parentCenterX - 32);
+        ObjectAnimator translateY = ObjectAnimator.ofFloat(v, View.TRANSLATION_Y,
+                -(parentCenterY-85));
+
+        translateX.setDuration(500);
+        translateY.setDuration(500);
+
+        AnimatorSet set = new AnimatorSet();
+        set.setInterpolator(new AnticipateOvershootInterpolator());
+        set.playTogether(translateX, translateY);
+        set.start();
+    }
+
+    public void redViewAnimationWithBounce(View v) {
+        v.setBackground(getResources().getDrawable(R.drawable.red_circle_view));
+        float parentCenterX = centerView.getX();
+        float parentCenterY = centerView.getY();
+
+        ObjectAnimator translateX = ObjectAnimator.ofFloat(v, View.TRANSLATION_X,
+                parentCenterX - 32);
+        ObjectAnimator translateY = ObjectAnimator.ofFloat(v, View.TRANSLATION_Y,
+                -(parentCenterY-85));
+
+        translateX.setDuration(500);
+        translateY.setDuration(500);
+
+        AnimatorSet set = new AnimatorSet();
+        set.setInterpolator(new BounceInterpolator());
+        set.playTogether(translateX, translateY);
         set.start();
     }
 
