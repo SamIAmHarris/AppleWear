@@ -6,14 +6,14 @@
         android:fromDegrees="-2"
         android:pivotX="15%"
         android:pivotY="15%"
-        android:repeatCount="10"
+        android:repeatCount="5"
         android:repeatMode="reverse"
         android:interpolator="@android:anim/accelerate_decelerate_interpolator"
         android:toDegrees="2" />
     <translate
         android:fromXDelta="-2"
         android:toXDelta="2"
-        android:repeatCount="10"
+        android:repeatCount="5"
         android:repeatMode="reverse"
         android:interpolator="@android:anim/accelerate_decelerate_interpolator"
         android:duration="70" />

@@ -3,6 +3,7 @@ package com.jackrabbitmobile.applewear;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.util.Log;
@@ -36,18 +37,40 @@ public class MainActivity extends WearableActivity {
 
     RelativeLayout mainBackground;
 
+    int chosenOne = 0;
+
+    final static String ANIM_EXTRA = "Animation extra";
+
+
+    final static int DOUBLE_ROTATE = 0;
+    final static int OVERSHOOT = 1;
+    final static int SINGLE_ROTATE = 2;
+    final static int BOUNCE = 3;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setAmbientEnabled();
 
+        Bundle animBundle = getIntent().getExtras();
+
+        if(animBundle != null) {
+            chosenOne = animBundle.getInt(ANIM_EXTRA);
+        }
         mainBackground = (RelativeLayout) findViewById(R.id.main_background);
 
         centerView = findViewById(R.id.center_view);
         checkmarkView = (ImageView) findViewById(R.id.checkmark_iv);
 
         correctTV = (TextView) findViewById(R.id.correct_tv);
+        correctTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetViews();
+            }
+        });
         redTV = (TextView) findViewById(R.id.red_tv);
 
         whatColorTV = (TextView) findViewById(R.id.what_color_tv);
@@ -150,10 +173,20 @@ public class MainActivity extends WearableActivity {
         fadeOutViewAnimation(whatColorTV);
         fadeOutViewAnimation(isAnAppleTV);
 
-        redViewAnimationWithDualRotate(redView);
-        //redViewAnimationWithBounce(redView);
-        //redViewAnimationWithOvershoot(redView);
-        //redViewAnimationWithSingleRotate(redView);
+        switch (chosenOne) {
+            case DOUBLE_ROTATE:
+                redViewAnimationWithDualRotate(redView);
+                break;
+            case OVERSHOOT:
+                redViewAnimationWithOvershoot(redView);
+                break;
+            case SINGLE_ROTATE:
+                redViewAnimationWithSingleRotate(redView);
+                break;
+            case BOUNCE:
+                redViewAnimationWithBounce(redView);
+                break;
+        }
 
         fadeInViewAnimation(correctTV);
         fadeInViewAnimation(redTV);
@@ -266,6 +299,29 @@ public class MainActivity extends WearableActivity {
         set.setInterpolator(new BounceInterpolator());
         set.playTogether(translateX, translateY);
         set.start();
+    }
+
+
+    public void resetViews() {
+        Intent intent = new Intent(this, MainActivity.class);
+
+        switch (chosenOne) {
+            case DOUBLE_ROTATE:
+                intent.putExtra(ANIM_EXTRA, OVERSHOOT);
+                break;
+            case OVERSHOOT:
+                intent.putExtra(ANIM_EXTRA, SINGLE_ROTATE);
+                break;
+            case SINGLE_ROTATE:
+                intent.putExtra(ANIM_EXTRA, BOUNCE);
+                break;
+            case BOUNCE:
+                intent.putExtra(ANIM_EXTRA, DOUBLE_ROTATE);
+                break;
+        }
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+        startActivity(intent);
     }
 
 }
