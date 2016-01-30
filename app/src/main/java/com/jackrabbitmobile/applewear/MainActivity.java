@@ -19,8 +19,17 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.estimote.sdk.Beacon;
+import com.estimote.sdk.BeaconManager;
+import com.estimote.sdk.Region;
+
+import java.util.List;
+
 
 public class MainActivity extends WearableActivity {
+
+    BeaconManager beaconManager;
+    private Region region;
 
     View redView;
     View grayView;
@@ -53,6 +62,15 @@ public class MainActivity extends WearableActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setAmbientEnabled();
+
+//        beaconManager = new BeaconManager(this);
+//
+//        beaconManager.setRangingListener(new BeaconManager.RangingListener() {
+//            @Override
+//            public void onBeaconsDiscovered(Region region, List<Beacon> list) {
+//                //for now we do nothing
+//            }
+//        });
 
         Bundle animBundle = getIntent().getExtras();
 
@@ -137,6 +155,23 @@ public class MainActivity extends WearableActivity {
                 return true;
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+//            @Override
+//            public void onServiceReady() {
+//                beaconManager.startRanging(region);
+//            }
+//        });
+    }
+
+    @Override
+    protected void onPause() {
+        //beaconManager.stopRanging(region);
+        super.onPause();
     }
 
     @Override
@@ -269,9 +304,9 @@ public class MainActivity extends WearableActivity {
         float parentCenterY = centerView.getY();
 
         ObjectAnimator translateX = ObjectAnimator.ofFloat(v, View.TRANSLATION_X,
-                parentCenterX - 32);
+                parentCenterX - 27);
         ObjectAnimator translateY = ObjectAnimator.ofFloat(v, View.TRANSLATION_Y,
-                -(parentCenterY-85));
+                -(parentCenterY-78));
 
         translateX.setDuration(500);
         translateY.setDuration(500);
